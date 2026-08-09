@@ -11,3 +11,19 @@ Critical resources:
 - GitHub Actions IAM role
 - Terraform state bucket
 - DynamoDB lock table
+
+
+# Bootstrap Infrastructure
+
+This stack creates:
+
+- GitHub OIDC Provider
+- GitHub Actions IAM Role
+- Terraform S3 Backend
+- Terraform DynamoDB Locking
+
+Run locally.
+
+Do not destroy casually.
+
+These resources are required for GitHub Actions authentication.
