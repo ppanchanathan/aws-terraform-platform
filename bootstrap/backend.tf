@@ -1,7 +1,9 @@
 # Add remote backend after first local bootstrap apply.
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "ppanchanathan-terraform-state"
+  bucket =   "ppanchanathan-terraform-state-${data.aws_caller_identity.current.account_id}"
 }
 
 resource "aws_s3_bucket_versioning" "versioning" {
@@ -11,7 +13,6 @@ resource "aws_s3_bucket_versioning" "versioning" {
     status = "Enabled"
   }
 }
-
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "sse" {
   bucket = aws_s3_bucket.terraform_state.id
