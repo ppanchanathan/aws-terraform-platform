@@ -1,0 +1,33 @@
+name: Drift Detection
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::240815058507:role/github-terraform-role
+
+      - name: Terraform Init
+        working-directory: platform/environments/dev
+        run: terraform init -backend-config=backend.hcl
+
+      - name: Drift Detection
+        working-directory: platform/environments/dev
+        run: terraform plan -detailed-exitcode
