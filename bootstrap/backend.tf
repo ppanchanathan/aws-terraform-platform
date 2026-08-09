@@ -1,11 +1,11 @@
 # Add remote backend after first local bootstrap apply.
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket =   "ppanchanathan-terraform-state"
+  bucket = "ppanchanathan-terraform-state"
 }
 
 resource "aws_s3_bucket_versioning" "versioning" {
-  bucket =   aws_s3_bucket.terraform_state.id
+  bucket = aws_s3_bucket.terraform_state.id
 
   versioning_configuration {
     status = "Enabled"
@@ -14,7 +14,7 @@ resource "aws_s3_bucket_versioning" "versioning" {
 
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "sse" {
-  bucket =   aws_s3_bucket.terraform_state.id
+  bucket = aws_s3_bucket.terraform_state.id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -24,9 +24,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "sse" {
 }
 
 resource "aws_dynamodb_table" "terraform_locks" {
-  name =   "terraform-locks"
-  billing_mode =   "PAY_PER_REQUEST"
-  hash_key = "LockID"
+  name         = "terraform-locks"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "LockID"
 
   attribute {
     name = "LockID"
