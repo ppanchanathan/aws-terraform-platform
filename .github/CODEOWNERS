@@ -1,0 +1,6 @@
+# High blast-radius paths require review
+
+/bootstrap/ @ppanchanathan
+/platform/environments/prod/ @ppanchanathan
+/platform/modules/kubernetes/ @ppanchanathan
+/.github/workflows/ @ppanchanathan
