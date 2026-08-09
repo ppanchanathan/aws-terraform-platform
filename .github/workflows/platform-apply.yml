@@ -1,0 +1,47 @@
+name: Platform Apply
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "platform/**"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform-apply:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Debug GitHub Context
+        run: |
+          echo "Repository=${{ github.repository }}"
+          echo "Ref=${{ github.ref }}"
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::240815058507:role/github-terraform-role
+
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
+
+      - name: Terraform Init
+        working-directory: platform/environments/dev
+        run: terraform init -backend-config=backend.hcl
+
+      - name: Terraform Plan
+        working-directory: platform/environments/dev
+        run: terraform plan
+
+      - name: Terraform Apply
+        working-directory: platform/environments/dev
+        run: terraform apply -auto-approve
