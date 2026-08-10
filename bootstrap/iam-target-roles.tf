@@ -20,7 +20,10 @@ resource "aws_iam_role" "github_actions" {
           }
 
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:ppanchanathan/aws-terraform-platform:*"
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:ppanchanathan/aws-terraform-platform:ref:refs/heads/main",
+              "repo:ppanchanathan/aws-terraform-platform:pull_request"              
+            ]
           }
         }
       }
