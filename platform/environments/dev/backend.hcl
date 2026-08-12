@@ -1,5 +1,5 @@
-bucket         = "REPLACE_WITH_BOOTSTRAP_STATE_BUCKET"
+bucket         = "ppanchanathan-terraform-state-240815058507"
 key            = "platform/dev/terraform.tfstate"
 region         = "us-east-2"
-dynamodb_table = "REPLACE_WITH_DYNAMODB_LOCK_TABLE"
+dynamodb_table = "terraform-locks"
 encrypt        = true
