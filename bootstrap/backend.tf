@@ -3,7 +3,7 @@
 data "aws_caller_identity" "current" {}
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket =   "ppanchanathan-terraform-state-${data.aws_caller_identity.current.account_id}"
+  bucket = "ppanchanathan-terraform-state-${data.aws_caller_identity.current.account_id}"
 }
 
 resource "aws_s3_bucket_versioning" "versioning" {
