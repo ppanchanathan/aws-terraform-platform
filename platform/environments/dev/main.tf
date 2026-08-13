@@ -108,6 +108,9 @@ module "ec2" {
     module.security_group.security_group_id
   ]
 
+  root_volume_size = local.compute.root_volume_size
+  root_volume_type = local.compute.root_volume_type
+
   tags = local.common_tags
 }
 

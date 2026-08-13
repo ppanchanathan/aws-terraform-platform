@@ -63,7 +63,9 @@ locals {
     subnet        = "public-a"
     instance_type = "t2.micro"
 
-    ssh_cidr = "0.0.0.0/0"
+    ssh_cidr         = "0.0.0.0/0"
+    root_volume_size = 40
+    root_volume_type = "gp3"
   }
 
   security_group = {
