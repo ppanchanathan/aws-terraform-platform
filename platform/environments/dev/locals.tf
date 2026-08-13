@@ -61,7 +61,7 @@ locals {
 
   compute = {
     subnet        = "public-a"
-    instance_type = "t2.micro"
+    instance_type = "t3.micro"
 
     ssh_cidr         = "0.0.0.0/0"
     root_volume_size = 40
