@@ -64,7 +64,7 @@ locals {
     instance_type = "t2.micro"
 
     ssh_cidr         = "0.0.0.0/0"
-    root_volume_size = 30
+    root_volume_size = 40
     root_volume_type = "gp3"
   }
 
