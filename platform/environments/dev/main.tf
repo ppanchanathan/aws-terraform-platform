@@ -62,6 +62,56 @@ module "routing" {
 }
 
 /*
+module "security_group" {
+
+  source = "../../modules/networking/security-group"
+
+  name = local.names.security_group
+
+  vpc_id = module.vpc.vpc_id
+
+  tags = local.common_tags
+}
+*/
+
+module "security_group" {
+
+  source = "../../modules/networking/security-group"
+
+  name = local.names.security_group
+
+  vpc_id = module.vpc.vpc_id
+
+  ingress_rules = local.security_group.ingress_rules
+
+  tags = local.common_tags
+}
+
+
+module "ec2" {
+
+  source = "../../modules/compute/ec2"
+
+  name = local.names.ec2
+
+  ami_id = data.aws_ami.amazon_linux.id
+
+  #instance_type = "t3.micro"
+  instance_type = local.compute.instance_type
+
+  #subnet_id = module.public_subnets["public-a"].subnet_id
+  subnet_id = module.public_subnets[
+    local.compute.subnet
+  ].subnet_id
+
+  security_group_ids = [
+    module.security_group.security_group_id
+  ]
+
+  tags = local.common_tags
+}
+
+/*
 module "routing" {
 
   source = "../../modules/networking/routing"

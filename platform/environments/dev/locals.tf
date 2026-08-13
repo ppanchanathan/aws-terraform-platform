@@ -33,6 +33,9 @@ locals {
     vpc         = "${local.project}-${local.environment}-vpc"
     igw         = "${local.project}-${local.environment}-igw"
     route_table = "${local.project}-${local.environment}-public-rt"
+
+    security_group = "${local.project}-${local.environment}-sg"
+    ec2            = "${local.project}-${local.environment}-ec2"
   }
 
   public_subnets = {
@@ -55,4 +58,78 @@ locals {
       name = "${local.project}-${local.environment}-public-c"
     }
   }
+
+  compute = {
+    subnet        = "public-a"
+    instance_type = "t2.micro"
+
+    ssh_cidr = "0.0.0.0/0"
+  }
+
+  security_group = {
+    ingress_rules = [
+
+      {
+        description = "SSH"
+        from_port   = 22
+        to_port     = 22
+        protocol    = "tcp"
+        #cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = [local.compute.ssh_cidr]
+      },
+
+      {
+        description = "HTTP"
+        from_port   = 80
+        to_port     = 80
+        protocol    = "tcp"
+        #cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = [local.compute.ssh_cidr]
+      },
+
+      {
+        description = "HTTPS"
+        from_port   = 443
+        to_port     = 443
+        protocol    = "tcp"
+        #cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = [local.compute.ssh_cidr]
+      }
+    ]
+  }
 }
+
+/*
+locals {
+
+  security_group = {
+    ingress_rules = [
+
+      {
+        description = "SSH"
+        from_port   = 22
+        to_port     = 22
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+      },
+
+      {
+        description = "HTTP"
+        from_port   = 80
+        to_port     = 80
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+      },
+
+      {
+        description = "HTTPS"
+        from_port   = 443
+        to_port     = 443
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+      }
+    ]
+  }
+}
+
+*/
