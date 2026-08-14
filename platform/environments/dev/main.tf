@@ -182,3 +182,15 @@ module "subnet_public_c" {
 }
 */
 
+
+# =================
+
+module "ecr" {
+
+  source = "../../modules/containers/ecr"
+
+  name = local.names.ecr
+
+  tags = local.common_tags
+}
+
