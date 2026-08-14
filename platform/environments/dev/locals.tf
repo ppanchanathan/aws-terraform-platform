@@ -36,6 +36,8 @@ locals {
 
     security_group = "${local.project}-${local.environment}-sg"
     ec2            = "${local.project}-${local.environment}-ec2"
+
+    ecr = "${local.project}-${local.environment}-ecr"
   }
 
   public_subnets = {
