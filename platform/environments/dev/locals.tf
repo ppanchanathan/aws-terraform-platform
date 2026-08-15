@@ -38,6 +38,8 @@ locals {
     ec2            = "${local.project}-${local.environment}-ec2"
 
     ecr = "${local.project}-${local.environment}-ecr"
+
+    eks = "${local.project}-${local.environment}-eks"
   }
 
   public_subnets = {
@@ -100,6 +102,10 @@ locals {
         cidr_blocks = [local.compute.ssh_cidr]
       }
     ]
+  }
+
+  eks = {
+    version = "1.34"
   }
 }
 

@@ -194,3 +194,18 @@ module "ecr" {
   tags = local.common_tags
 }
 
+module "eks" {
+
+  source = "../../modules/kubernetes/eks"
+
+  name = local.names.eks
+
+  kubernetes_version = local.eks.version
+
+  subnet_ids = [
+    for subnet in module.public_subnets :
+    subnet.subnet_id
+  ]
+
+  tags = local.common_tags
+}
