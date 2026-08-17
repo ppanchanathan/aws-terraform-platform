@@ -203,7 +203,7 @@ module "eks" {
   kubernetes_version = local.eks.version
 
   access_principals = local.eks.access_principals
-  
+
   subnet_ids = [
     for subnet in module.public_subnets :
     subnet.subnet_id

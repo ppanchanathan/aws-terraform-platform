@@ -68,9 +68,9 @@ resource "aws_eks_access_entry" "cluster_admin" {
 resource "aws_eks_access_policy_association" "cluster_admin" {
   for_each = toset(var.access_principals.cluster_admins)
 
-  cluster_name = aws_eks_cluster.this.name
+  cluster_name  = aws_eks_cluster.this.name
   principal_arn = each.value
-  policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
 
   access_scope {
     type = "cluster"
