@@ -39,7 +39,8 @@ locals {
 
     ecr = "${local.project}-${local.environment}-ecr"
 
-    eks = "${local.project}-${local.environment}-eks"
+    eks        = "${local.project}-${local.environment}-eks"
+    node_group = "${local.project}-${local.environment}-ng"
   }
 
   public_subnets = {
@@ -106,8 +107,23 @@ locals {
 
   eks = {
     version = "1.34"
+
+    access_principals = {
+      cluster_admins = [
+        "arn:aws:iam::240815058507:root"
+      ]
+    }
+  }
+
+  node_group = {
+    instance_types = ["t3.small"]
+    desired_size   = 2
+    min_size       = 2
+    max_size       = 3
   }
 }
+
+
 
 /*
 locals {
