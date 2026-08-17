@@ -94,7 +94,8 @@ module "ec2" {
 
   name = local.names.ec2
 
-  ami_id = data.aws_ami.amazon_linux.id
+  #ami_id = data.aws_ami.amazon_linux.id
+  ami_id = local.compute.ami_id
 
   #instance_type = "t3.micro"
   instance_type = local.compute.instance_type
@@ -232,6 +233,21 @@ module "node_group" {
   min_size = local.node_group.min_size
 
   max_size = local.node_group.max_size
+
+  tags = local.common_tags
+}
+
+
+module "irsa" {
+
+  source = "../../modules/kubernetes/irsa"
+
+  role_name            = local.irsa.role_name
+  namespace            = local.irsa.namespace
+  service_account_name = local.irsa.service_account_name
+  oidc_provider_arn    = module.eks.oidc_provider_arn
+  oidc_issuer_url      = module.eks.oidc_issuer_url
+  policy_arns          = local.irsa.policy_arns
 
   tags = local.common_tags
 }
