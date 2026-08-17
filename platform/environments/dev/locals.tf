@@ -67,6 +67,7 @@ locals {
   compute = {
     subnet        = "public-a"
     instance_type = "t3.micro"
+    ami_id        = "ami-0ffd780281e5e3a51"
 
     ssh_cidr         = "0.0.0.0/0"
     root_volume_size = 40
@@ -121,7 +122,20 @@ locals {
     min_size       = 2
     max_size       = 3
   }
+
+  irsa = {
+    namespace            = "default"
+    service_account_name = "app-sa"
+
+    role_name = "${local.project}-${local.environment}-irsa"
+
+    policy_arns = [
+      "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+    ]
+  }
 }
+
+
 
 
 
