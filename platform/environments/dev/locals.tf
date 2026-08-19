@@ -123,6 +123,7 @@ locals {
     max_size       = 3
   }
 
+  /*
   irsa = {
     namespace            = "default"
     service_account_name = "app-sa"
@@ -132,6 +133,24 @@ locals {
     policy_arns = [
       "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
     ]
+  }
+  */
+
+  irsa = {
+    namespace            = "default"
+    service_account_name = "app-sa"
+
+    role_name = "${local.project}-${local.environment}-irsa"
+
+    policy_arns = {
+      s3 = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+    }
+  }
+
+  alb_controller = {
+    namespace            = "kube-system"
+    service_account_name = "aws-load-balancer-controller"
+    role_name            = "${local.project}-${local.environment}-alb-controller"
   }
 }
 

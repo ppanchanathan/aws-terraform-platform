@@ -18,17 +18,6 @@ variable "oidc_issuer_url" {
   type = string
 }
 
-/*
-variable "policy_arns" {
-  type = list(string)
-}
-*/
-
-variable "policy_arns" {
-  type = map(string)
-}
-
 variable "tags" {
-  type    = map(string)
-  default = {}
+  type = map(string)
 }
