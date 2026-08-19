@@ -87,7 +87,6 @@ module "security_group" {
   tags = local.common_tags
 }
 
-
 module "ec2" {
 
   source = "../../modules/compute/ec2"
@@ -250,4 +249,16 @@ module "irsa" {
   policy_arns          = local.irsa.policy_arns
 
   tags = local.common_tags
+}
+
+module "alb_controller" {
+
+  source = "../../modules/kubernetes/alb-controller"
+
+  namespace            = local.alb_controller.namespace
+  service_account_name = local.alb_controller.service_account_name
+  role_name            = local.alb_controller.role_name
+  oidc_provider_arn    = module.eks.oidc_provider_arn
+  oidc_issuer_url      = module.eks.oidc_issuer_url
+  tags                 = local.common_tags
 }
