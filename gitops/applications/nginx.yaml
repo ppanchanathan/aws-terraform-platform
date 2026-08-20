@@ -5,7 +5,7 @@ metadata:
   name: nginx
   namespace: argocd
   annotations:
-    test.gitops/change: "v1"
+    test.gitops/change: "v2"
 
 spec:
   project: default
