@@ -6,19 +6,26 @@ metadata:
   namespace: argocd
 
 spec:
+
   project: default
+
   source:
     repoURL: https://github.com/ppanchanathan/aws-terraform-platform.git
-    targetRevision: main
+
+    targetRevision: feature/argocd
+
     path: gitops/apps/nginx
 
   destination:
     server: https://kubernetes.default.svc
+
     namespace: default
 
   syncPolicy:
+
     automated:
       prune: true
       selfHeal: true
+
     syncOptions:
       - CreateNamespace=true
