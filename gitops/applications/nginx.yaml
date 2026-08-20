@@ -4,28 +4,22 @@ kind: Application
 metadata:
   name: nginx
   namespace: argocd
+  annotations:
+    test.gitops/change: "v1"
 
 spec:
-
   project: default
-
   source:
     repoURL: https://github.com/ppanchanathan/aws-terraform-platform.git
-
-    targetRevision: feature/argocd
-
+    targetRevision: main
     path: gitops/apps/nginx
-
   destination:
     server: https://kubernetes.default.svc
-
     namespace: default
 
   syncPolicy:
-
     automated:
       prune: true
       selfHeal: true
-
     syncOptions:
       - CreateNamespace=true
