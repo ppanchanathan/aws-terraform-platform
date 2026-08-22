@@ -1,24 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
+
 metadata:
-  name: nginx
+  name: platform-project
   namespace: argocd
-  annotations:
-    test.gitops/change: "v2"
 
 spec:
-  project: platform
+  project: default
+
   source:
     repoURL: https://github.com/ppanchanathan/aws-terraform-platform.git
     targetRevision: main
-    path: gitops/apps/nginx
+    path: gitops/argocd/projects
+
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: argocd
 
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
