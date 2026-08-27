@@ -117,7 +117,7 @@ locals {
   }
 
   node_group = {
-    instance_types = ["t3.small"]
+    instance_types = ["m7i-flex.large"]
     desired_size   = 2
     min_size       = 2
     max_size       = 3
