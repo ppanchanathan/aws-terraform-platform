@@ -12,6 +12,7 @@ spec:
     - https://github.com/ppanchanathan/aws-terraform-platform.git
     - https://charts.jetstack.io
     - https://prometheus-community.github.io/helm-charts
+    - https://charts.external-secrets.io
 
   destinations:
     - namespace: '*'
