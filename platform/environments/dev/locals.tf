@@ -152,6 +152,12 @@ locals {
     service_account_name = "aws-load-balancer-controller"
     role_name            = "${local.project}-${local.environment}-alb-controller"
   }
+
+  external_secrets = {
+    namespace            = "external-secrets"
+    service_account_name = "external-secrets"
+    role_name            = "${local.project}-${local.environment}-external-secrets"
+  }
 }
 
 

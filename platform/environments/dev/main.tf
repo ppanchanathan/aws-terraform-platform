@@ -262,3 +262,17 @@ module "alb_controller" {
   oidc_issuer_url      = module.eks.oidc_issuer_url
   tags                 = local.common_tags
 }
+
+module "external_secrets" {
+  source = "../../modules/kubernetes/external-secrets"
+
+  role_name            = local.external_secrets.role_name
+  namespace            = local.external_secrets.namespace
+  service_account_name = local.external_secrets.service_account_name
+  oidc_provider_arn    = module.eks.oidc_provider_arn
+  oidc_issuer_url      = module.eks.oidc_issuer_url
+
+  secret_arns = ["arn:aws:secretsmanager:us-east-2:240815058507:secret:platform/dev/*"]
+
+  tags = local.common_tags
+}
