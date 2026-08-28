@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 2
+
+  template:
+    metadata:
+      labels:
+        environment: prod
+
+    spec:
+      containers:
+        - name: nginx
+
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+
+            limits:
+              cpu: 750m
+              memory: 512Mi
