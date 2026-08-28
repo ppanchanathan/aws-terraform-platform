@@ -1,0 +1,28 @@
+# gitops/applications/prometheus-crds.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: prometheus-crds
+  namespace: argocd
+
+spec:
+  project: platform
+
+  source:
+    repoURL: https://github.com/ppanchanathan/aws-terraform-platform.git
+    targetRevision: main
+    path: gitops/apps/prometheus-crds
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - ServerSideApply=true
