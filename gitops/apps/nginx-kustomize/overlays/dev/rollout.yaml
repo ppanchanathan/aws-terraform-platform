@@ -46,6 +46,6 @@ spec:
             periodSeconds: 20
   strategy:
     blueGreen:
-      activeService: nginx
-      previewService: nginx-preview
+      activeService: dev-nginx
+      previewService: dev-nginx-preview
       autoPromotionEnabled: false
