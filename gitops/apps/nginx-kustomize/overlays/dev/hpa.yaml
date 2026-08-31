@@ -6,7 +6,7 @@ spec:
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
-    name: nginx
+    name: dev-nginx
 
   minReplicas: 2
   maxReplicas: 4
