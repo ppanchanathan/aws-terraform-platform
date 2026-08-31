@@ -1,5 +1,6 @@
-apiVersion: apps/v1
-kind: Deployment
+# gitops/apps/nginx-kustomize/base/rollout.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: nginx
   labels:
@@ -51,3 +52,9 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 20
+
+  strategy:
+    blueGreen:
+      activeService: nginx
+      previewService: nginx-preview
+      autoPromotionEnabled: false

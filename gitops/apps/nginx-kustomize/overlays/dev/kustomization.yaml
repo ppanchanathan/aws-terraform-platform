@@ -9,7 +9,7 @@ resources:
   - hpa.yaml
 
 patches:
-  - path: deployment-patch.yaml
+  - path: rollout-patch.yaml
 
 #commonLabels:
 #  environment: dev

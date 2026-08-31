@@ -13,14 +13,15 @@ spec:
         elements:
           - env: dev
             namespace: nginx-dev
+            autoSync: true
 
           - env: prod
             namespace: nginx-prod
+            autoSync: false
 
   template:
     metadata:
       name: 'nginx-{{ .env }}'
-
       labels:
         app.kubernetes.io/name: nginx
         app.kubernetes.io/part-of: platform-demo
@@ -39,9 +40,10 @@ spec:
         namespace: '{{ .namespace }}'
 
       syncPolicy:
+        {{- if .autoSync }}
         automated:
           prune: true
           selfHeal: true
-
+        {{- end }}
         syncOptions:
           - CreateNamespace=true
