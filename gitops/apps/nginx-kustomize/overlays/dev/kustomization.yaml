@@ -6,10 +6,11 @@ namePrefix: dev-
 
 resources:
   - ../../base
+  - rollout.yaml
   - hpa.yaml
 
-patches:
-  - path: rollout-patch.yaml
+#patches:
+#  - path: rollout-patch.yaml
 
 #commonLabels:
 #  environment: dev
