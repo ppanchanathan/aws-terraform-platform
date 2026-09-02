@@ -9,16 +9,16 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/actions.dev-nginx-root: |
-      {
-        "Type":"forward",
-        "ForwardConfig":{
-          "TargetGroups":[
-            {"ServiceName":"dev-nginx","ServicePort":"80","Weight":100},
-            {"ServiceName":"dev-nginx-canary","ServicePort":"80","Weight":0}
-          ]
-        }
-      }
+#    alb.ingress.kubernetes.io/actions.dev-nginx-root: |
+#      {
+#        "Type":"forward",
+#        "ForwardConfig":{
+#          "TargetGroups":[
+#            {"ServiceName":"dev-nginx","ServicePort":"80","Weight":100},
+#            {"ServiceName":"dev-nginx-canary","ServicePort":"80","Weight":0}
+#          ]
+#        }
+#      }
 spec:
   rules:
     - http:
