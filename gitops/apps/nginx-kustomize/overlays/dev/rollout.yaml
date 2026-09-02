@@ -55,6 +55,7 @@ spec:
       trafficRouting:
         alb:
           ingress: dev-nginx
+          rootService: dev-nginx-root
           servicePort: 80
       steps:
         - setWeight: 10
