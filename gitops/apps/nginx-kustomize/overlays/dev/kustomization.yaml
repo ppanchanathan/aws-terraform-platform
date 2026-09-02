@@ -8,6 +8,8 @@ resources:
   - ../../base
   - rollout.yaml
   - hpa.yaml
+  - service-canary.yaml
+  - ingress.yaml
 
 #patches:
 #  - path: rollout-patch.yaml
