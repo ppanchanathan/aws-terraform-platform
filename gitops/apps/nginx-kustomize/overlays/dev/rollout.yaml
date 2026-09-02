@@ -45,7 +45,25 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 20
   strategy:
-    blueGreen:
-      activeService: dev-nginx
-      previewService: dev-nginx-preview
-      autoPromotionEnabled: false
+ #   blueGreen:
+ #     activeService: dev-nginx
+ #     previewService: dev-nginx-preview
+ #     autoPromotionEnabled: false
+    canary:
+      canaryService: dev-nginx-canary
+      stableService: dev-nginx
+      trafficRouting:
+        alb:
+          ingress: dev-nginx
+          servicePort: 80
+      steps:
+        - setWeight: 10
+        - pause: {}
+        - setWeight: 25
+        - pause: {duration: 30}
+        - setWeight: 50
+        - pause: {duration: 30}
+        - setWeight: 75
+        - pause: {duration: 30}
+
+# Note: Pause{} with no duration means indefinite manual pause (matches your automated promotion coming later)
