@@ -10,6 +10,7 @@ resources:
   - hpa.yaml
   - service-canary.yaml
   - ingress.yaml
+  - analysistemplate.yaml
 
 #patches:
 #  - path: rollout-patch.yaml
