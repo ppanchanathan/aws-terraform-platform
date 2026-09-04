@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: nginx-canary-health
+spec:
+  args:
+    - name: canary-hash
+  metrics:
+    - name: pod-ready
+      interval: 15s
+      count: 4
+      successCondition: result[0] >= 1
+      failureLimit: 2
+      provider:
+        prometheus:
+          address: http://prometheus-grafana-kube-pr-prometheus.monitoring.svc.cluster.local:9090
+          query: |
+            sum(kube_pod_status_ready{namespace="nginx-dev", condition="true"} * on(pod) kube_pod_labels{label_rollouts_pod_template_hash="{{args.canary-hash}}"})
+    - name: no-restarts
+      interval: 15s
+      count: 4
+      successCondition: result[0] == 0
+      failureLimit: 0
+      provider:
+        prometheus:
+          address: http://prometheus-grafana-kube-pr-prometheus.monitoring.svc.cluster.local:9090
+          query: |
+            sum(increase(kube_pod_container_status_restarts_total{namespace="nginx-dev"}[2m]) * on(pod) kube_pod_labels{label_rollouts_pod_template_hash="{{args.canary-hash}}"})
