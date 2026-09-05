@@ -3,8 +3,6 @@ kind: AnalysisTemplate
 metadata:
   name: nginx-canary-error-rate
 spec:
-  args:
-    - name: canary-target-group
   metrics:
     - name: error-rate
       interval: 30s
@@ -15,4 +13,8 @@ spec:
         prometheus:
           address: http://yace.monitoring.svc.cluster.local:80
           query: |
-            sum(aws_applicationelb_httpcode_target_5_xx_count_sum{dimension_TargetGroup=~".*{{args.canary-target-group}}.*"}) or vector(0)
+            sum(
+              aws_applicationelb_httpcode_target_5_xx_count_sum
+              * on(name) group_left(tag_ingress_k8s_aws_resource)
+              aws_applicationelb_info{tag_ingress_k8s_aws_resource="nginx-dev/dev-nginx-dev-nginx-canary:80"}
+            ) or vector(0)
