@@ -11,6 +11,7 @@ spec:
     targetRevision: "0.42.1"
     helm:
       values: |
+        fullnameOverride: yace
         serviceAccount:
           annotations:
             eks.amazonaws.com/role-arn: arn:aws:iam::240815058507:role/platform-dev-cloudwatch-exporter
