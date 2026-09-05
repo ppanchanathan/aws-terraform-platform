@@ -1,0 +1,22 @@
+nohup: ignoring input
+Forwarding from 127.0.0.1:3000 -> 3000
+Forwarding from [::1]:3000 -> 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+E0828 03:38:34.595872   38372 portforward.go:522] "Unhandled Error" err="an error occurred forwarding 3000 -> 3000: error forwarding port 3000 to pod c24892b7365517b598f05cf7ee5f1fea0d594095b529148f73b55842f05ece42, uid : network namespace for sandbox \"c24892b7365517b598f05cf7ee5f1fea0d594095b529148f73b55842f05ece42\" is closed"
+error: lost connection to pod
