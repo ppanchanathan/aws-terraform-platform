@@ -11,7 +11,7 @@ spec:
       failureLimit: 1
       provider:
         prometheus:
-          address: http://yace.monitoring.svc.cluster.local:80
+          address: http://prometheus-grafana-kube-pr-prometheus.monitoring.svc.cluster.local:9090
           query: |
             sum(
               aws_applicationelb_httpcode_target_5_xx_count_sum
