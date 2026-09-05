@@ -44,11 +44,32 @@ spec:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 20
-  strategy:
+ # strategy:
  #   blueGreen:
  #     activeService: dev-nginx
  #     previewService: dev-nginx-preview
  #     autoPromotionEnabled: false
+ #    canary:
+ #     canaryService: dev-nginx-canary
+ #     stableService: dev-nginx
+ #     trafficRouting:
+ #       alb:
+ #         ingress: dev-nginx
+ #         rootService: dev-nginx-root
+ #         servicePort: 80
+ #     steps:
+ #       - setWeight: 10
+ #        - pause: {}
+ #       - setWeight: 25
+ #       - pause: {duration: 30}
+ #       - setWeight: 50
+ #       - pause: {duration: 30}
+ #       - setWeight: 75
+ #       - pause: {duration: 30}
+
+# Note: Pause{} with no duration means indefinite manual pause (matches your automated promotion coming later)
+
+  strategy:
     canary:
       canaryService: dev-nginx-canary
       stableService: dev-nginx
@@ -59,12 +80,16 @@ spec:
           servicePort: 80
       steps:
         - setWeight: 10
-        - pause: {}
+        - analysis:
+            templates:
+              - templateName: dev-nginx-canary-health
+              - templateName: dev-nginx-canary-error-rate
+            args:
+              - name: canary-hash
+                valueFrom:
+                  podTemplateHashValue: Latest
         - setWeight: 25
         - pause: {duration: 30}
         - setWeight: 50
         - pause: {duration: 30}
-        - setWeight: 75
-        - pause: {duration: 30}
-
-# Note: Pause{} with no duration means indefinite manual pause (matches your automated promotion coming later)
+        - setWeight: 100
