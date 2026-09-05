@@ -126,7 +126,7 @@ locals {
   /*
   irsa = {
     namespace            = "default"
-    service_account_name = "app-sa"
+    service_account_name = "app-sa"../
 
     role_name = "${local.project}-${local.environment}-irsa"
 
@@ -157,6 +157,12 @@ locals {
     namespace            = "external-secrets"
     service_account_name = "external-secrets"
     role_name            = "${local.project}-${local.environment}-external-secrets"
+  }
+
+  cloudwatch_exporter = {
+    namespace            = "monitoring"
+    service_account_name = "yace"
+    role_name            = "${local.project}-${local.environment}-cloudwatch-exporter"
   }
 }
 

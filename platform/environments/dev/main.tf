@@ -276,3 +276,15 @@ module "external_secrets" {
 
   tags = local.common_tags
 }
+
+module "cloudwatch_exporter" {
+  source = "../../modules/kubernetes/cloudwatch-exporter"
+
+  role_name            = local.cloudwatch_exporter.role_name
+  namespace            = local.cloudwatch_exporter.namespace
+  service_account_name = local.cloudwatch_exporter.service_account_name
+  oidc_provider_arn    = module.eks.oidc_provider_arn
+  oidc_issuer_url      = module.eks.oidc_issuer_url
+
+  tags = local.common_tags
+}
