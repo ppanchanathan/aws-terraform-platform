@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloudwatch-exporter
+  namespace: argocd
+spec:
+  project: platform
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus-yet-another-cloudwatch-exporter
+    targetRevision: "0.42.1"
+    helm:
+      values: |
+        serviceAccount:
+          annotations:
+            eks.amazonaws.com/role-arn: arn:aws:iam::240815058507:role/platform-dev-cloudwatch-exporter
+        config:
+          apiVersion: v1alpha1
+          discovery:
+            jobs:
+              - type: AWS/ApplicationELB
+                regions:
+                  - us-east-2
+                metrics:
+                  - name: RequestCount
+                    statistics: [Sum]
+                    period: 60
+                    length: 300
+                  - name: HTTPCode_Target_5XX_Count
+                    statistics: [Sum]
+                    period: 60
+                    length: 300
+                  - name: TargetResponseTime
+                    statistics: [Average]
+                    period: 60
+                    length: 300
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
