@@ -14,7 +14,7 @@ spec:
         serviceAccount:
           annotations:
             eks.amazonaws.com/role-arn: arn:aws:iam::240815058507:role/platform-dev-cloudwatch-exporter
-        config:
+        config: |
           apiVersion: v1alpha1
           discovery:
             jobs:
