@@ -15,6 +15,10 @@ spec:
         serviceAccount:
           annotations:
             eks.amazonaws.com/role-arn: arn:aws:iam::240815058507:role/platform-dev-cloudwatch-exporter
+        serviceMonitor:
+          enabled: true
+          labels:
+            release: prometheus-grafana
         config: |
           apiVersion: v1alpha1
           discovery:
