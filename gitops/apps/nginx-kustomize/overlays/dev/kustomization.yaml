@@ -11,6 +11,7 @@ resources:
   - service-canary.yaml
   - ingress.yaml
   - analysistemplate.yaml
+  - analysistemplate-cloudwatch.yaml
 
 #patches:
 #  - path: rollout-patch.yaml
