@@ -9,7 +9,8 @@ resource "aws_iam_policy" "this" {
         Action = [
           "cloudwatch:GetMetricData",
           "cloudwatch:ListMetrics",
-          "tag:GetResources"
+          "tag:GetResources",
+          "iam:ListAccountAliases"
         ]
         Resource = "*"
       }
