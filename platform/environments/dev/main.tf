@@ -288,3 +288,17 @@ module "cloudwatch_exporter" {
 
   tags = local.common_tags
 }
+
+module "karpenter" {
+  source = "../../modules/kubernetes/karpenter"
+
+  role_name      = local.karpenter.role_name
+  cluster_name   = module.eks.cluster_name
+  node_role_arn  = module.node_group.node_role_arn
+  node_role_name = module.node_group.node_role_name
+
+  oidc_provider_arn = module.eks.oidc_provider_arn
+  oidc_issuer_url   = module.eks.oidc_issuer_url
+
+  tags = local.common_tags
+}

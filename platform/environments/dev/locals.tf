@@ -164,6 +164,10 @@ locals {
     service_account_name = "yace"
     role_name            = "${local.project}-${local.environment}-cloudwatch-exporter"
   }
+
+  karpenter = {
+    role_name = "${local.project}-${local.environment}-karpenter"
+  }
 }
 
 
