@@ -22,7 +22,7 @@ spec:
             spotToSpotConsolidation: false
             nodeRepair: false
             nodeOverlay: false
-            StaticCapacity: false
+            staticCapacity: false
         controller:
           resources:
             requests:
