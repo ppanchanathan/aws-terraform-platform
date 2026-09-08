@@ -36,7 +36,8 @@ resource "aws_iam_policy" "controller" {
           "ec2:DescribeSpotPriceHistory",
           "ec2:DescribeImages",
           "pricing:GetProducts",
-          "ssm:GetParameter"
+          "ssm:GetParameter",
+          "eks:DescribeCluster"
         ]
       },
       {
