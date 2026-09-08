@@ -17,6 +17,12 @@ spec:
         settings:
           clusterName: platform-dev-eks
           interruptionQueue: platform-dev-eks-karpenter-interruption
+          featureGates:
+            reservedCapacity: true
+            spotToSpotConsolidation: false
+            nodeRepair: false
+            nodeOverlay: false
+            StaticCapacity: false
         controller:
           resources:
             requests:
