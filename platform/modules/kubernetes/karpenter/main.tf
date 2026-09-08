@@ -41,6 +41,20 @@ resource "aws_iam_policy" "controller" {
         ]
       },
       {
+        Sid      = "AllowInstanceProfileManagement"
+        Effect   = "Allow"
+        Resource = "*"
+        Action = [
+          "iam:ListInstanceProfiles",
+          "iam:CreateInstanceProfile",
+          "iam:AddRoleToInstanceProfile",
+          "iam:RemoveRoleFromInstanceProfile",
+          "iam:DeleteInstanceProfile",
+          "iam:TagInstanceProfile",
+          "iam:GetInstanceProfile"
+        ]
+      },
+      {
         Sid      = "AllowPassingInstanceRole"
         Effect   = "Allow"
         Action   = "iam:PassRole"
