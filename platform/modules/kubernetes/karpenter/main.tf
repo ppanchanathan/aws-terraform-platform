@@ -66,7 +66,7 @@ module "irsa" {
   source = "../irsa"
 
   role_name            = var.role_name
-  namespace            = "karpenter"
+  namespace            = "kube-system"
   service_account_name = "karpenter"
   oidc_provider_arn    = var.oidc_provider_arn
   oidc_issuer_url      = var.oidc_issuer_url

@@ -11,6 +11,7 @@ spec:
     targetRevision: "1.8.0"
     helm:
       values: |
+        replicas: 1
         serviceAccount:
           annotations:
             eks.amazonaws.com/role-arn: arn:aws:iam::240815058507:role/platform-dev-karpenter
