@@ -38,7 +38,14 @@ module "public_subnets" {
 
   map_public_ip_on_launch = true
 
-  tags = local.common_tags
+  #  tags = local.common_tags
+  tags = merge(
+    local.common_tags,
+    {
+      "karpenter.sh/discovery" = local.names.eks
+    }
+  )
+
 }
 
 #
@@ -84,7 +91,13 @@ module "security_group" {
 
   ingress_rules = local.security_group.ingress_rules
 
-  tags = local.common_tags
+  #  tags = local.common_tags
+  tags = merge(
+    local.common_tags,
+    {
+      "karpenter.sh/discovery" = local.names.eks
+    }
+  )
 }
 
 module "ec2" {
