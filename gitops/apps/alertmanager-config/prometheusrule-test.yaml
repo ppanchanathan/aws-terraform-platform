@@ -14,6 +14,7 @@ spec:
           for: 1m
           labels:
             severity: warning
+            namespace: monitoring
           annotations:
             summary: "Test alert firing"
             description: "This is a manual test to confirm Slack routing works end-to-end."
