@@ -23,8 +23,8 @@ spec:
           operator: In
           values: ["t3.medium", "t3.large", "m5.large", "m7i-flex.large"]
   limits:
-    cpu: "8"
-    memory: 16Gi
+    cpu: "16"
+    memory: 32Gi
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 1m

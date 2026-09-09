@@ -35,6 +35,8 @@ resource "aws_iam_policy" "controller" {
           "ec2:DescribeSecurityGroups",
           "ec2:DescribeSpotPriceHistory",
           "ec2:DescribeImages",
+          "ec2:CreateLaunchTemplate",
+          "ec2:DeleteLaunchTemplate",
           "pricing:GetProducts",
           "ssm:GetParameter",
           "eks:DescribeCluster"
