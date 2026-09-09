@@ -21,6 +21,12 @@ spec:
           enabled: false
         grafana:
           adminPassword: admin123
+        alertmanager:
+          alertmanagerSpec:
+            alertmanagerConfigSelector:
+              matchLabels: {}
+            alertmanagerConfigNamespaceSelector:
+              matchLabels: {}
 
   destination:
     server: https://kubernetes.default.svc
