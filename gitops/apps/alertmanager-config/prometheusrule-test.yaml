@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: test-alert
+  namespace: monitoring
+  labels:
+    release: prometheus-grafana
+spec:
+  groups:
+    - name: test.rules
+      rules:
+        - alert: TestSlackAlert
+          expr: vector(1)
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Test alert firing"
+            description: "This is a manual test to confirm Slack routing works end-to-end."
