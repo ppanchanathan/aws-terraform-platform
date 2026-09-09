@@ -1,0 +1,15 @@
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  amiFamily: AL2023
+  role: platform-dev-ng-node-role
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: platform-dev-eks
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: platform-dev-eks
+  tags:
+    karpenter.sh/discovery: platform-dev-eks
