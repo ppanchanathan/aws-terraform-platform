@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - clustersecretstore.yaml
   - externalsecret-nginx.yaml
+  - externalsecret-alertmanager-slack.yaml
