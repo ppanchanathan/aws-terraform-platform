@@ -20,6 +20,8 @@ spec:
   destinations:
     - namespace: '*'
       server: https://kubernetes.default.svc
+    - namespace: '*'
+      server: https://1F41124D3A53E9083C29D06264D46EBE.gr7.us-west-2.eks.amazonaws.com
 
   clusterResourceWhitelist:
     - group: '*'
