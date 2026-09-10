@@ -14,7 +14,7 @@ spec:
       source:
         repoURL: https://github.com/ppanchanathan/aws-terraform-platform.git
         targetRevision: main
-        path: gitops/apps/nginx-kustomize/base
+        path: gitops/apps/nginx-multicluster
       destination:
         server: '{{server}}'
         namespace: nginx-demo
