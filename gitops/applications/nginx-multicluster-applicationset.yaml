@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nginx-multicluster
+  namespace: argocd
+spec:
+  generators:
+    - clusters: {}
+  template:
+    metadata:
+      name: 'nginx-{{name}}'
+    spec:
+      project: platform
+      source:
+        repoURL: https://github.com/ppanchanathan/aws-terraform-platform.git
+        targetRevision: main
+        path: gitops/apps/nginx-kustomize/base
+      destination:
+        server: '{{server}}'
+        namespace: nginx-demo
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
