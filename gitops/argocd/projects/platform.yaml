@@ -16,6 +16,7 @@ spec:
     - https://argoproj.github.io/argo-helm
     - https://kyverno.github.io/kyverno/
     - public.ecr.aws/karpenter
+    - https://charts.crossplane.io/stable
 
   destinations:
     - namespace: '*'
