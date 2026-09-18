@@ -315,3 +315,15 @@ module "karpenter" {
 
   tags = local.common_tags
 }
+
+module "crossplane_aws_s3" {
+  source = "../../modules/kubernetes/crossplane-aws-s3"
+
+  role_name            = local.crossplane_aws_s3.role_name
+  namespace            = local.crossplane_aws_s3.namespace
+  service_account_name = local.crossplane_aws_s3.service_account_name
+  oidc_provider_arn    = module.eks.oidc_provider_arn
+  oidc_issuer_url      = module.eks.oidc_issuer_url
+
+  tags = local.common_tags
+}

@@ -168,6 +168,12 @@ locals {
   karpenter = {
     role_name = "${local.project}-${local.environment}-karpenter"
   }
+
+  crossplane_aws_s3 = {
+    namespace            = "crossplane-system"
+    service_account_name = "crossplane-provider-aws-s3"
+    role_name            = "${local.project}-${local.environment}-crossplane-aws-s3"
+  }
 }
 
 

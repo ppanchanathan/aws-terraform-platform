@@ -10,3 +10,7 @@ output "karpenter_node_instance_profile_name" {
 output "karpenter_interruption_queue_name" {
   value = module.karpenter.interruption_queue_name
 }
+
+output "crossplane_aws_s3_role_arn" {
+  value = module.crossplane_aws_s3.role_arn
+}
